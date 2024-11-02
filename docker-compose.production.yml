@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./docker/db/Dockerfile
     ports:
-      - 8080:8080
+      - 5001:8080
     volumes:
       - /volumes/funk-word-map/staging/pb_data:/pb/pb_data
 
@@ -15,11 +15,11 @@ services:
       dockerfile: ./docker/web/Dockerfile
       target: production
     ports:
-      - 3000:3000
+      - 5000:3000
     environment:
       ORIGIN:
       PORT: 3000
-      DB_URL: http://db:8080
+      DB_URL: http://db:5001
       DB_ADMIN_USER:
       DB_ADMIN_PASSWORD:
       PUBLIC_IS_STAGING:
