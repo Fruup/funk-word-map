@@ -1,0 +1,10 @@
+name: funk-word-map
+services:
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./docker/db/volumes/pb_data:/pb/pb_data
