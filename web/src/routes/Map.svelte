@@ -2,7 +2,7 @@
 	import { controlledEffect } from '$lib/utils.svelte'
 	import { onMount, type ComponentProps, type Snippet } from 'svelte'
 	import { MapLibre, type Map, type LngLatLike } from 'svelte-maplibre'
-	import geoJson from '../../data/3_mittel.geo.json'
+	import geoJson from '../../../data/3_mittel.geo.json'
 
 	let {
 		children,

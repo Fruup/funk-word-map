@@ -25,10 +25,13 @@
 	let isPopupOpen = $state(false)
 	let map = $state<MapLibreMap>()
 
-	const loadedVote = storedState<{
-		value: string
-		lngLat: [number, number]
-	}>('vote')
+	const loadedVote = storedState<
+		| {
+				value: string
+				lngLat: [number, number]
+		  }
+		| undefined
+	>('vote', undefined)
 
 	let shouldShowForm = $derived(!loadedVote.value)
 
@@ -55,11 +58,13 @@
 	const { form: formData, enhance } = form
 
 	function onMapLoaded() {
-		setTimeout(() => {
-			toast('🎉 Danke fürs Abstimmen!', { id: 'thanks', duration: 10000 })
+		if (loadedVote.value) {
+			setTimeout(() => {
+				toast('🎉 Danke fürs Abstimmen!', { id: 'thanks', duration: 10000 })
 
-			map?.panTo(loadedVote.value.lngLat, { duration: 1000 })
-		}, 1000)
+				map?.panTo(loadedVote.value.lngLat, { duration: 1000 })
+			}, 1000)
+		}
 	}
 </script>
 
@@ -69,7 +74,7 @@
 			transition:fly={{ duration: 300, y: 10 }}
 			method="POST"
 			use:enhance
-			class="z-10 m-2 flex max-w-[400px] flex-col space-y-4 rounded-xl border-[1px] bg-background/70 p-4 shadow-md backdrop-blur-sm"
+			class="bg-background/70 z-10 m-2 flex max-w-[400px] flex-col space-y-4 rounded-xl border-[1px] p-4 shadow-md backdrop-blur-sm"
 			id="form"
 		>
 			<Form.Field {form} name="value">
@@ -103,7 +108,7 @@
 						class="flex w-fit max-w-[min(90vw,300px)] flex-col gap-1"
 						align="center"
 					>
-						<p class="prose mb-2 text-center text-sm text-muted-foreground">
+						<p class="prose text-muted-foreground mb-2 text-center text-sm">
 							Bist Du sicher? Du kannst deine Auswahl nicht mehr ändern!
 						</p>
 
@@ -147,7 +152,7 @@
 				<div in:fly={{ y: -20, duration: 1000, delay: 1000 }}>
 					<span class="text-3xl drop-shadow-lg">🍊</span>
 					<div
-						class="absolute inline-block -translate-x-1/2 -translate-y-full rotate-6 rounded-lg bg-background p-1.5 text-xl font-semibold leading-tight text-foreground shadow-md"
+						class="bg-background text-foreground absolute inline-block -translate-x-1/2 -translate-y-full rotate-6 rounded-lg p-1.5 text-center text-xl font-semibold leading-tight shadow-md"
 					>
 						"{value}"
 					</div>

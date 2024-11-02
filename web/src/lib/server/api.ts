@@ -2,12 +2,16 @@ import Pocketbase, { ClientResponseError, type RecordModel } from 'pocketbase'
 import { env } from '$env/dynamic/private'
 
 const pb = new Pocketbase(env.DB_URL)
-pb.autoCancellation(false)
-await pb.collection('_superusers').authWithPassword(env.DB_ADMIN_USER!, env.DB_ADMIN_PASSWORD!)
+
 const zipCodesCollection = pb.collection('zipCodes')
 const entriesCollection = pb.collection('entries')
 
 export const api = {
+	async init() {
+		pb.autoCancellation(false)
+		await pb.collection('_superusers').authWithPassword(env.DB_ADMIN_USER!, env.DB_ADMIN_PASSWORD!)
+	},
+
 	async getOptions(query: string) {
 		query = query.trim()
 

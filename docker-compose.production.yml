@@ -7,7 +7,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./docker/db/volumes/pb_data:/pb/pb_data
+      - /pb/pb_data
 
   web:
     build:
@@ -16,10 +16,3 @@ services:
       target: production
     ports:
       - 80:80
-    environment:
-      ORIGIN:
-      PORT: 80
-      DB_URL: http://db:8080
-      DB_ADMIN_USER:
-      DB_ADMIN_PASSWORD:
-      PUBLIC_IS_STAGING: true
