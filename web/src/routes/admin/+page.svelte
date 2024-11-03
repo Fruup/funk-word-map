@@ -22,6 +22,7 @@
 	const groups = storedState<
 		{
 			id: string
+			label: string
 			color: string
 			values: string[]
 		}[]
@@ -60,7 +61,8 @@
 		'settings',
 		{
 			markerSize: [0.5],
-			markerOpacity: [0.5],
+			markerOpacity: [0.75],
+			legendPosition: [16.310406617354204, 51.574962467130405] as [number, number],
 		},
 		{
 			debounce: 1000,
@@ -68,7 +70,7 @@
 	)
 
 	function addGroup() {
-		groups.value.push({ id: crypto.randomUUID(), color: '#888', values: [] })
+		groups.value.push({ id: crypto.randomUUID(), label: '', color: '#888', values: [] })
 	}
 
 	function deleteGroup(id: string) {
@@ -164,7 +166,9 @@
 									<li>
 										<Label>Actions</Label>
 
-										<div>
+										<div class="flex flex-row items-center gap-2">
+											<Input bind:value={group.label} placeholder="Name..." class="grow" />
+
 											<Popover.Root>
 												<Popover.Trigger
 													class="border-muted hover:bg-muted grid size-8 place-content-center rounded-full border-[1px]"
@@ -233,6 +237,26 @@
 			></div>
 		</Marker>
 	{/each}
+
+	<Marker bind:lngLat={settings.value.legendPosition} draggable>
+		<div class="bg-background rounded-2xl border-[1px] p-4 text-[1rem] shadow-lg">
+			<h4 class="mb-3 font-semibold">Legende</h4>
+
+			<ul class="flex flex-col space-y-2">
+				{#each groups.value as group}
+					<li>
+						<div
+							class="inline-block size-4 rounded-full align-[-2px] shadow-sm"
+							style:background-color={group.color}
+						></div>
+						<span>
+							{group.label}
+						</span>
+					</li>
+				{/each}
+			</ul>
+		</div>
+	</Marker>
 </Map>
 
 <style lang="scss">
