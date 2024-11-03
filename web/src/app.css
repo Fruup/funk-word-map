@@ -10,6 +10,11 @@
 	font-style: normal;
 }
 
+:root,
+html {
+	overflow-x: hidden;
+}
+
 .gradient-text {
 	--color-accent-1: rgb(203, 0, 255);
 	--color-accent-2: rgb(255, 128, 0);

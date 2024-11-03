@@ -138,7 +138,7 @@
 						<MessageCircleQuestionIcon class="text-muted-foreground" />
 					</Drawer.Trigger>
 
-					<Drawer.Content class="max-h-[90%]">
+					<Drawer.Content class="max-h-[90svh]">
 						<div class="overflow-auto">
 							<InfoPage />
 						</div>

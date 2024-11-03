@@ -7,9 +7,9 @@
 
 <Toaster position="bottom-center" />
 
-<div class="grid min-h-screen grid-rows-[auto_1fr]" data-vaul-drawer-wrapper>
+<div class="grid min-h-[100svh] grid-rows-[auto_1fr]" data-vaul-drawer-wrapper>
 	<header
-		class="grid place-content-center border-b-[1px] border-foreground bg-background/80 p-4 backdrop-blur-sm"
+		class="border-foreground bg-background/80 grid place-content-center border-b-[1px] p-4 backdrop-blur-sm"
 	>
 		<nav>
 			<ul class="flex flex-row place-content-center items-center space-x-4">
