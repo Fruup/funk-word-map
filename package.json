@@ -1,0 +1,10 @@
+{
+  "name": "funk-word-map",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {},
+  "devDependencies": {
+    "@types/bun": "^1.1.13",
+    "pocketbase": "0.22.0-rc2"
+  }
+}

@@ -3,7 +3,7 @@ FROM oven/bun:latest AS builder
 WORKDIR /work
 
 ADD web/package.json web/bun.lockb ./
-RUN bun install
+RUN bun install --frozen-lockfile
 
 ADD data ./data
 ADD web ./web
@@ -17,9 +17,7 @@ FROM oven/bun:latest AS production
 
 WORKDIR /work
 
-COPY --from=builder /work/web/package.json /work/web/bun.lockb ./
-RUN bun install --production
-
 COPY --from=builder /work/web/build ./
+RUN bun install --production
 
 CMD ["bun", "run", "./index.js"]
