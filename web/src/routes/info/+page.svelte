@@ -3,15 +3,13 @@
 
 	<h3 id="was">Was ist das?</h3>
 	<p>
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt quo consequatur laudantium
-		temporibus placeat nisi tempore, veniam earum fugiat exercitationem sed eligendi at qui maxime.
-		Cupiditate aliquam voluptatem, recusandae dolores hic minus sunt cum iusto ipsa excepturi
-		tenetur rerum esse fugit culpa delectus soluta aliquid a possimus nostrum inventore deserunt
-		expedita. Nihil, dolorem. Fuga tempora aspernatur et iusto quod quibusdam mollitia hic ipsam
-		quae, sapiente vitae obcaecati impedit? Nesciunt, quas soluta dolores tempora aperiam
-		consequuntur in incidunt aut distinctio ab sunt necessitatibus veniam quidem totam molestias
-		neque labore voluptas fugiat quaerat. Modi optio obcaecati quis provident amet dignissimos
-		dolore explicabo!
+		Hi! Dieses Projekt ist ein Versuch, herauszufinden, in welcher Region Deutschlands welches Wort
+		für das Entfernen einer Mandarinenschale verwendet wird. Das Ergebnis wird auf dem
+		Instagram-Account <a
+			href="https://www.instagram.com/funk/"
+			target="_blank"
+			rel="noopener noreferrer">@funk</a
+		> veröffentlicht.
 	</p>
 
 	<h3 id="daten">Welche Daten werden gespeichert und was passiert damit?</h3>

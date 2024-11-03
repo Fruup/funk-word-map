@@ -5,21 +5,21 @@ services:
       context: .
       dockerfile: ./docker/db/Dockerfile
     ports:
-      - 8080:8080
+      - 5001:5001
     volumes:
       - ./docker/db/volumes/pb_data:/pb/pb_data
 
-  web:
-    build:
-      context: .
-      dockerfile: ./docker/web/Dockerfile
-      target: production
-    ports:
-      - 80:80
-    environment:
-      ORIGIN:
-      PORT: 80
-      DB_URL: http://db:8080
-      DB_ADMIN_USER:
-      DB_ADMIN_PASSWORD:
-      PUBLIC_IS_STAGING: true
+  # web:
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/web/Dockerfile
+  #     target: production
+  #   ports:
+  #     - 80:80
+  #   environment:
+  #     ORIGIN:
+  #     PORT: 80
+  #     DB_URL: http://db:8080
+  #     DB_ADMIN_USER:
+  #     DB_ADMIN_PASSWORD:
+  #     PUBLIC_IS_STAGING: true
