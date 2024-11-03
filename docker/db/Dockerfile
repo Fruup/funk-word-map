@@ -2,7 +2,6 @@ FROM alpine:latest
 
 # ARG PB_VERSION=0.22.22
 ARG PB_VERSION=0.23.0-rc8
-ARG PORT=8080
 
 RUN apk add --no-cache \
 	unzip \
@@ -18,7 +17,7 @@ RUN unzip /tmp/pb.zip -d /pb/
 # uncomment to copy the local pb_hooks dir into the image
 # COPY ./pb_hooks /pb/pb_hooks
 
-EXPOSE ${PORT}
+EXPOSE 5001
 
 # start PocketBase
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:${PORT}"]
+CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:5001"]
