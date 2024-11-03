@@ -50,7 +50,7 @@
 					lngLat: data.lngLat,
 				}
 
-				map?.panTo(loadedVote.value.lngLat, { duration: 1000 })
+				zoomToVote()
 			}
 		},
 	})
@@ -62,9 +62,20 @@
 			setTimeout(() => {
 				toast('🎉 Danke fürs Abstimmen!', { id: 'thanks', duration: 10000 })
 
-				map?.panTo(loadedVote.value.lngLat, { duration: 1000 })
+				zoomToVote()
 			}, 1000)
 		}
+	}
+
+	function zoomToVote() {
+		if (!loadedVote.value) return
+		if (!map) return
+
+		map.flyTo({
+			zoom: 5.3,
+			center: loadedVote.value.lngLat,
+			duration: 1000,
+		})
 	}
 </script>
 

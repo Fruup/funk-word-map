@@ -7,7 +7,7 @@
 	let {
 		children,
 		map = $bindable(),
-		zoom = $bindable(5.3),
+		zoom = $bindable(4.8),
 		onLoaded,
 		...rest
 	}: Partial<ComponentProps<MapLibre>> & {
