@@ -38,6 +38,7 @@
 		})
 
 	let isToolboxOpen = $state(true)
+	let toolboxClosedStyle = $state(!isToolboxOpen)
 	let zoom = $state<number>(5.3)
 	let openGroupId = $state<string>()
 
@@ -77,9 +78,9 @@
 
 <div
 	class={cn(
-		'toolbox absolute z-10 m-3 w-[min(400px,100vw)] rounded-xl border-[1px] p-3  *:text-sm',
-		!isToolboxOpen && 'w-fit border-transparent',
-		isToolboxOpen && 'bg-background shadow-md',
+		'toolbox absolute z-10 m-3 w-[min(400px,90vw)] rounded-xl border-[1px] p-3 transition-all *:text-sm',
+		toolboxClosedStyle && 'w-fit border-transparent',
+		!toolboxClosedStyle && 'bg-background shadow-md',
 	)}
 >
 	<Button
@@ -89,12 +90,16 @@
 		onclick={() => (isToolboxOpen = !isToolboxOpen)}
 	>
 		<ToolIcon />
-		<!-- <ChevronDownIcon class={cn('transition-transform', isToolboxOpen && 'rotate-180')} /> -->
 		Toolbox
 	</Button>
 
 	{#if isToolboxOpen}
-		<div transition:slide={{ duration: 200 }} class="content flex flex-col space-y-4">
+		<div
+			transition:slide={{ duration: 300 }}
+			onintrostart={() => (toolboxClosedStyle = false)}
+			onoutroend={() => (toolboxClosedStyle = true)}
+			class="content flex flex-col space-y-4 overflow-hidden"
+		>
 			<Separator />
 
 			<div>
@@ -136,7 +141,7 @@
 								size="sm"
 								onclick={() =>
 									openGroupId === group.id ? (openGroupId = undefined) : (openGroupId = group.id)}
-								class="min-h-fit w-full bg-muted py-1 text-left hover:bg-muted/25"
+								class="bg-muted hover:bg-muted/25 min-h-fit w-full py-1 text-left"
 							>
 								<ChevronDownIcon />
 
@@ -145,7 +150,7 @@
 
 									{#if group.values.length > 0}
 										<div
-											class="overflow-hidden overflow-ellipsis text-nowrap text-muted-foreground"
+											class="text-muted-foreground overflow-hidden overflow-ellipsis text-nowrap"
 											title={group.values.join(', ')}
 										>
 											"{group.values.join(', ')}"
@@ -162,7 +167,7 @@
 										<div>
 											<Popover.Root>
 												<Popover.Trigger
-													class="grid size-8 place-content-center rounded-full border-[1px] border-muted hover:bg-muted"
+													class="border-muted hover:bg-muted grid size-8 place-content-center rounded-full border-[1px]"
 												>
 													<TrashIcon size={16} />
 												</Popover.Trigger>

@@ -55,7 +55,7 @@
 		},
 	})
 
-	const { form: formData, enhance } = form
+	const { form: formData, enhance, submit } = form
 
 	function onMapLoaded() {
 		if (loadedVote.value) {
@@ -115,7 +115,7 @@
 					</div>
 
 					<Popover.Content
-						portal={false}
+						portal={true}
 						class="flex w-fit max-w-[min(90vw,300px)] flex-col gap-1"
 						align="center"
 					>
@@ -123,13 +123,18 @@
 							Bist Du sicher? Du kannst deine Auswahl nicht mehr ändern!
 						</p>
 
-						<Form.Button onclick={() => (isPopupOpen = false)}>OK!</Form.Button>
+						<Form.Button
+							onclick={(e) => {
+								submit(e)
+								isPopupOpen = false
+							}}>OK!</Form.Button
+						>
 						<Button variant="outline" onclick={() => (isPopupOpen = false)}>Stop!</Button>
 					</Popover.Content>
 				</Popover.Root>
 
 				<Drawer.Root shouldScaleBackground setBackgroundColorOnScale={false}>
-					<Drawer.Trigger class="justify-items-end">
+					<Drawer.Trigger class="justify-self-end">
 						<MessageCircleQuestionIcon class="text-muted-foreground" />
 					</Drawer.Trigger>
 
