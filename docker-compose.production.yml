@@ -8,6 +8,12 @@ services:
       - 5001:8080
     volumes:
       - /volumes/funk-word-map/staging/pb_data:/pb/pb_data
+    healthcheck:
+      test: ["curl", "-sSf", "http://localhost:8080"]
+      interval: 1m
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   web:
     build:
@@ -23,3 +29,9 @@ services:
       DB_ADMIN_USER:
       DB_ADMIN_PASSWORD:
       PUBLIC_IS_STAGING:
+    healthcheck:
+      test: ["curl", "-sSf", "http://localhost:3000/api/health"]
+      interval: 1m
+      timeout: 5s
+      retries: 5
+      start_period: 5s
