@@ -5,6 +5,8 @@
 
 	let { children } = $props()
 
+	console.log(import.meta.env)
+
 	const showDebugMenu = $derived(
 		import.meta.env.DEV || import.meta.env.PUBLIC_IS_STAGING === 'true',
 	)
