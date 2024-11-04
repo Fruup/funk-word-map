@@ -38,6 +38,12 @@
 	const form = superForm(data.form, {
 		validators: zodClient(formSchema),
 		dataType: 'json',
+		onSubmit(input) {
+			if (!isPopupOpen) {
+				isPopupOpen = true
+				input.cancel()
+			}
+		},
 		onResult(event) {
 			if (event.result.type === 'success') {
 				const data = (event.result.data as ActionData)?.data
@@ -114,11 +120,7 @@
 						<Popover.Trigger class={cn(buttonVariants())}>Senden</Popover.Trigger>
 					</div>
 
-					<Popover.Content
-						portal={true}
-						class="flex w-fit max-w-[min(90vw,300px)] flex-col gap-1"
-						align="center"
-					>
+					<Popover.Content class="flex w-fit max-w-[min(90vw,300px)] flex-col gap-1" align="center">
 						<p class="prose text-muted-foreground mb-2 text-center text-sm">
 							Bist Du sicher? Du kannst deine Auswahl nicht mehr ändern!
 						</p>

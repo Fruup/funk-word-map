@@ -1,8 +1,12 @@
 <script lang="ts">
+	import DebugMenu from '$lib/components/DebugMenu.svelte'
 	import '../app.css'
 	import { Toaster } from 'svelte-sonner'
+	import { PUBLIC_IS_STAGING } from '$env/static/public'
 
 	let { children } = $props()
+
+	const showDebugMenu = $derived(import.meta.env.DEV || PUBLIC_IS_STAGING === 'true')
 </script>
 
 <Toaster position="bottom-center" />
@@ -30,3 +34,7 @@
 		{@render children()}
 	</main>
 </div>
+
+{#if showDebugMenu}
+	<DebugMenu />
+{/if}
