@@ -261,6 +261,8 @@
 								{group.label}
 							</span>
 						</li>
+					{:else}
+						<li class="text-sm text-muted-foreground">Keine Gruppen definiert.</li>
 					{/each}
 				</ul>
 			</div>
