@@ -20,7 +20,7 @@
 			<ul class="flex flex-row place-content-center items-center space-x-4">
 				<li>
 					<h1 class="text-xl font-bold">
-						<a href="/">funk survey</a>
+						<a class="underline" href="/">funk survey</a>
 					</h1>
 				</li>
 
