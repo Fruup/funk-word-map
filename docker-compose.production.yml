@@ -28,7 +28,8 @@ services:
       DB_URL: ${DB_URL}
       DB_ADMIN_USER: ${DB_ADMIN_USER}
       DB_ADMIN_PASSWORD: ${DB_ADMIN_PASSWORD}
-      # PUBLIC_IS_STAGING: ${PUBLIC_IS_STAGING}
+      PUBLIC_IS_STAGING: ${PUBLIC_IS_STAGING}
+      ADMIN_AUTH: ${ADMIN_AUTH}
     # healthcheck:
     #   test: ["CMD", "curl", "-sSf", "http://localhost:3000/api/health"]
     #   interval: 1m
