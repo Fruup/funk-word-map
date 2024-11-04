@@ -16,6 +16,7 @@
 	import ToolIcon from 'lucide-svelte/icons/hammer'
 	import PlusIcon from 'lucide-svelte/icons/plus'
 	import * as Popover from '$lib/components/ui/popover'
+	import Switch from '$lib/components/ui/switch/switch.svelte'
 
 	let { data } = $props()
 
@@ -62,6 +63,7 @@
 		{
 			markerSize: [0.5],
 			markerOpacity: [0.75],
+			showLegend: true,
 			legendPosition: [16.310406617354204, 51.574962467130405] as [number, number],
 		},
 		{
@@ -121,6 +123,11 @@
 						max={1}
 						step={0.01}
 					/>
+				</Label>
+
+				<Label>
+					Zeige Legende
+					<Switch class="block" bind:checked={settings.value.showLegend} />
 				</Label>
 			</div>
 
@@ -238,25 +245,27 @@
 		</Marker>
 	{/each}
 
-	<Marker bind:lngLat={settings.value.legendPosition} draggable>
-		<div class="bg-background rounded-2xl border-[1px] p-4 text-[1rem] shadow-lg">
-			<h4 class="mb-3 font-semibold">Legende</h4>
+	{#if settings.value.showLegend}
+		<Marker bind:lngLat={settings.value.legendPosition} draggable>
+			<div class="bg-background rounded-2xl border-[1px] p-4 text-[1rem] shadow-lg">
+				<h4 class="mb-3 font-semibold">Legende</h4>
 
-			<ul class="flex flex-col space-y-2">
-				{#each groups.value as group}
-					<li>
-						<div
-							class="inline-block size-4 rounded-full align-[-2px] shadow-sm"
-							style:background-color={group.color}
-						></div>
-						<span>
-							{group.label}
-						</span>
-					</li>
-				{/each}
-			</ul>
-		</div>
-	</Marker>
+				<ul class="flex flex-col space-y-2">
+					{#each groups.value as group}
+						<li>
+							<div
+								class="inline-block size-4 rounded-full align-[-2px] shadow-sm"
+								style:background-color={group.color}
+							></div>
+							<span>
+								{group.label}
+							</span>
+						</li>
+					{/each}
+				</ul>
+			</div>
+		</Marker>
+	{/if}
 </Map>
 
 <style lang="scss">

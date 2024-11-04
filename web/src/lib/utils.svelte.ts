@@ -8,10 +8,14 @@ export const storedState = <T = any>(
 			const stored = localStorage.getItem(key)
 			if (stored) {
 				try {
-					// Merge the stored value with the initial value.
-					return {
-						...initialValue,
-						...JSON.parse(stored),
+					if (typeof initialValue === 'object' && !Array.isArray(initialValue)) {
+						// Merge the stored value with the initial value.
+						return {
+							...initialValue,
+							...JSON.parse(stored),
+						}
+					} else {
+						return JSON.parse(stored)
 					}
 				} catch (e) {
 					console.warn(e)
