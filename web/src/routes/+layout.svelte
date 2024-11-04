@@ -2,14 +2,13 @@
 	import DebugMenu from '$lib/components/DebugMenu.svelte'
 	import '../app.css'
 	import { Toaster } from 'svelte-sonner'
+	import { env } from '$env/dynamic/public'
 
 	let { children } = $props()
 
-	console.log(import.meta.env)
+	console.log(env)
 
-	const showDebugMenu = $derived(
-		import.meta.env.DEV || import.meta.env.PUBLIC_IS_STAGING === 'true',
-	)
+	const showDebugMenu = $derived(import.meta.env.DEV || env.PUBLIC_IS_STAGING === 'true')
 </script>
 
 <Toaster position="bottom-center" />
