@@ -13,6 +13,10 @@
 			duration: 2000,
 		})
 	}
+
+	function throwError() {
+		throw new Error('foo')
+	}
 </script>
 
 <div class="fixed bottom-0 left-0 z-20 m-2">
@@ -22,6 +26,7 @@
 			class="bg-background my-2 flex flex-col gap-2 rounded-xl border-[1px] p-2 shadow-md"
 		>
 			<Button variant="secondary" onclick={clearVote}>Vote löschen</Button>
+			<Button variant="secondary" onclick={throwError}>Throw Error</Button>
 		</div>
 	{/if}
 

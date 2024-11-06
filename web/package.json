@@ -12,6 +12,8 @@
 		"lint": "prettier --check ."
 	},
 	"devDependencies": {
+		"@sentry/browser": "^8.37.1",
+		"@sentry/node": "^8.37.1",
 		"@sveltejs/kit": "^2.7.4",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@tailwindcss/typography": "^0.5.15",

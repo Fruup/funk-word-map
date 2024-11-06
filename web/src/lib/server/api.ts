@@ -1,5 +1,6 @@
 import Pocketbase, { ClientResponseError, type RecordModel } from 'pocketbase'
 import { env } from '$env/dynamic/private'
+import { Sentry } from '$lib/errors'
 
 const pb = new Pocketbase(env.DB_URL)
 
@@ -19,7 +20,11 @@ export const api = {
 
 		// Refresh periodically.
 		refreshTimer = setInterval(
-			() => auth().catch(console.error),
+			() =>
+				auth().catch((e) => {
+					console.error(e)
+					Sentry.captureException(e)
+				}),
 			12 * 60 * 60 * 1000, // 12h
 		)
 	},

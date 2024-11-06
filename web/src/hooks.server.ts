@@ -1,4 +1,7 @@
-import { type Handle } from '@sveltejs/kit'
+import { initializeSentry, Sentry } from '$lib/errors'
+initializeSentry()
+
+import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { api } from './lib/server/api'
 import { env } from '$env/dynamic/private'
 
@@ -23,4 +26,16 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	return resolve(event)
+}
+
+export const handleError: HandleServerError = ({ error, event, message, status }) => {
+	console.error(error)
+
+	const errorId = Sentry.captureException(error)
+
+	return {
+		status,
+		message,
+		errorId,
+	}
 }
