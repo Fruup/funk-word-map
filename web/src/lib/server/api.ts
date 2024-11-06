@@ -6,10 +6,22 @@ const pb = new Pocketbase(env.DB_URL)
 const zipCodesCollection = pb.collection('zipCodes')
 const entriesCollection = pb.collection('entries')
 
+let refreshTimer: ReturnType<typeof setInterval>
+
 export const api = {
 	async init() {
 		pb.autoCancellation(false)
-		await pb.collection('_superusers').authWithPassword(env.DB_ADMIN_USER!, env.DB_ADMIN_PASSWORD!)
+
+		const auth = () =>
+			pb.collection('_superusers').authWithPassword(env.DB_ADMIN_USER!, env.DB_ADMIN_PASSWORD!)
+
+		await auth()
+
+		// Refresh periodically.
+		refreshTimer = setInterval(
+			() => auth().catch(console.error),
+			12 * 60 * 60 * 1000, // 12h
+		)
 	},
 
 	async getOptions(query: string) {
