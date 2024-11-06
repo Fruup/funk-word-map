@@ -40,6 +40,7 @@
 		})
 
 	let isToolboxOpen = $state(true)
+	// svelte-ignore state_referenced_locally
 	let toolboxClosedStyle = $state(!isToolboxOpen)
 	let zoom = $state<number>(5.3)
 	let openGroupId = $state<string>()
@@ -169,7 +170,7 @@
 							</Button>
 
 							{#if openGroupId === group.id}
-								<ul transition:slide={{ duration: 200 }} class="mt-2 space-y-2">
+								<ul transition:slide={{ duration: 200 }} class="mt-2 space-y-2 p-1">
 									<li>
 										<Label>Actions</Label>
 
@@ -178,7 +179,7 @@
 
 											<Popover.Root>
 												<Popover.Trigger
-													class="border-muted hover:bg-muted grid size-8 place-content-center rounded-full border-[1px]"
+													class="border-muted hover:bg-muted grid aspect-square size-9 place-content-center rounded-full border-[1px]"
 												>
 													<TrashIcon size={16} />
 												</Popover.Trigger>
