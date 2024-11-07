@@ -1,6 +1,6 @@
 import Pocketbase, { ClientResponseError, type RecordModel } from 'pocketbase'
 import { env } from '$env/dynamic/private'
-import { Sentry } from '$lib/errors'
+import { Sentry } from '$lib/errors/server'
 
 const pb = new Pocketbase(env.DB_URL)
 

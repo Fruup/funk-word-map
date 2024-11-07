@@ -1,13 +1,10 @@
-import { browser } from '$app/environment'
 import pkg from '../../../package.json'
 import { env } from '$env/dynamic/public'
 
-export const Sentry = await (browser ? import('@sentry/browser') : import('@sentry/node'))
+export const initializeSentry = (instance: { isInitialized: any; init: any }) => {
+	if (instance.isInitialized()) return
 
-export const initializeSentry = () => {
-	if (Sentry.isInitialized()) return
-
-	Sentry.init({
+	instance.init({
 		dsn: import.meta.env.PUBLIC_SENTRY_DSN,
 		environment: import.meta.env.DEV
 			? 'development'

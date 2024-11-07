@@ -1,5 +1,6 @@
-import { initializeSentry, Sentry } from '$lib/errors'
-initializeSentry()
+import { initializeSentry } from '$lib/errors'
+import { Sentry } from '$lib/errors/server'
+initializeSentry(Sentry)
 
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { api } from './lib/server/api'
