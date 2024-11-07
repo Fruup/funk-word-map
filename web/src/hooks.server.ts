@@ -32,7 +32,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 export const handleError: HandleServerError = ({ error, event, message, status }) => {
 	console.error(error)
 
-	const errorId = Sentry.captureException(error)
+	const errorId = Sentry.captureException(error, { extra: { event, status } })
 
 	return {
 		status,

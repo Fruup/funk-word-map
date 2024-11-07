@@ -1,14 +1,18 @@
 import pkg from '../../../package.json'
 import { env } from '$env/dynamic/public'
+import type { init, isInitialized } from '@sentry/browser'
 
-export const initializeSentry = (instance: { isInitialized: any; init: any }) => {
+export const initializeSentry = (instance: {
+	isInitialized: typeof isInitialized
+	init: typeof init
+}) => {
 	if (instance.isInitialized()) return
 
+	console.log('Initializing Sentry...')
+
 	instance.init({
-		dsn: import.meta.env.PUBLIC_SENTRY_DSN,
-		environment: import.meta.env.DEV
-			? 'development'
-			: import.meta.env.PUBLIC_ENVIRONMENT || 'production',
+		dsn: env.PUBLIC_SENTRY_DSN,
+		environment: import.meta.env.DEV ? 'development' : env.PUBLIC_ENVIRONMENT || 'production',
 		release: (() => {
 			let release = `${pkg.name}@${pkg.version}`
 
@@ -19,4 +23,6 @@ export const initializeSentry = (instance: { isInitialized: any; init: any }) =>
 			return release
 		})(),
 	})
+
+	console.log('Sentry initialized!')
 }
