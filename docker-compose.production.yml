@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./docker/db/Dockerfile
     ports:
-      - ${PORT_DB}:${PORT_DB}
+      - ${PORT_DB}:8080
     volumes:
       - /volumes/funk-word-map/staging/pb_data:/pb/pb_data
     # healthcheck:
