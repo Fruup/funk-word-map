@@ -9,28 +9,30 @@ export const initializeSentry = (instance: {
 }) => {
 	if (instance.isInitialized()) return
 
-	console.log('Initializing Sentry...')
-
 	const { protocol, host } = new URL(env.PUBLIC_ORIGIN)
 
 	const dsn = browser
 		? `${protocol}//${env.PUBLIC_SENTRY_DSN_KEY}@${host}/${env.PUBLIC_SENTRY_DSN_PROJECT_ID}` // Proxy
 		: `https://${env.PUBLIC_SENTRY_DSN_KEY}@${env.PUBLIC_SENTRY_DSN_DOMAIN}/${env.PUBLIC_SENTRY_DSN_PROJECT_ID}`
 
-	console.log({ dsn })
+	const environment = import.meta.env.DEV ? 'development' : env.PUBLIC_ENVIRONMENT || 'production'
+
+	const release = (() => {
+		let release = `${pkg.name}@${pkg.version}`
+
+		if (env.PUBLIC_SOURCE_COMMIT) {
+			release += `+${env.PUBLIC_SOURCE_COMMIT.slice(0, 7)}`
+		}
+
+		return release
+	})()
+
+	console.log('Initializing Sentry...', { dsn, release, environment })
 
 	instance.init({
 		dsn,
-		environment: import.meta.env.DEV ? 'development' : env.PUBLIC_ENVIRONMENT || 'production',
-		release: (() => {
-			let release = `${pkg.name}@${pkg.version}`
-
-			if (env.PUBLIC_SOURCE_COMMIT) {
-				release += `+${env.PUBLIC_SOURCE_COMMIT.slice(0, 7)}`
-			}
-
-			return release
-		})(),
+		environment,
+		release,
 	})
 
 	console.log('Sentry initialized!')
