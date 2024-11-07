@@ -1,12 +1,19 @@
 {
-	"files.exclude": {
-		"**/.git": true,
-		"**/.svn": true,
-		"**/.hg": true,
-		"**/CVS": true,
-		"**/.DS_Store": true,
-		"**/Thumbs.db": true
-	},
-	"hide-files.files": [],
-	"cSpell.words": ["pocketbase", "Pocketbase", "tailwindcss", "zipcode"]
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "hide-files.files": [],
+  "cSpell.words": [
+    "pocketbase",
+    "Pocketbase",
+    "proxied",
+    "tailwindcss",
+    "undici",
+    "zipcode"
+  ]
 }

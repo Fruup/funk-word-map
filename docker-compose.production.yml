@@ -31,6 +31,7 @@ services:
       PUBLIC_IS_STAGING: ${PUBLIC_IS_STAGING}
       ADMIN_AUTH: ${ADMIN_AUTH}
       PUBLIC_SOURCE_COMMIT: ${SOURCE_COMMIT}
+      PUBLIC_ORIGIN: ${ORIGIN}
     # healthcheck:
     #   test: ["CMD", "curl", "-sSf", "http://localhost:3000/api/health"]
     #   interval: 1m
