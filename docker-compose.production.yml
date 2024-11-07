@@ -28,13 +28,12 @@ services:
       DB_URL: ${DB_URL}
       DB_ADMIN_USER: ${DB_ADMIN_USER}
       DB_ADMIN_PASSWORD: ${DB_ADMIN_PASSWORD}
-      PUBLIC_IS_STAGING: ${PUBLIC_IS_STAGING}
       ADMIN_AUTH: ${ADMIN_AUTH}
+
+      PUBLIC_IS_STAGING: ${PUBLIC_IS_STAGING}
       PUBLIC_SOURCE_COMMIT: ${SOURCE_COMMIT}
       PUBLIC_ORIGIN: ${ORIGIN}
-    # healthcheck:
-    #   test: ["CMD", "curl", "-sSf", "http://localhost:3000/api/health"]
-    #   interval: 1m
-    #   timeout: 5s
-    #   retries: 5
-    #   start_period: 5s
+
+      PUBLIC_SENTRY_DSN_KEY: ${PUBLIC_SENTRY_DSN_KEY}
+      PUBLIC_SENTRY_DSN_DOMAIN: ${PUBLIC_SENTRY_DSN_DOMAIN}
+      PUBLIC_SENTRY_DSN_PROJECT_ID: ${PUBLIC_SENTRY_DSN_PROJECT_ID}

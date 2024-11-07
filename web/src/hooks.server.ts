@@ -19,8 +19,7 @@ const proxy = proxyHandle(
 		 * Proxy sentry endpoints to monitoring service.
 		 * Prevents the requests from being blocked.
 		 */
-		[`/api/${publicEnv.PUBLIC_SENTRY_DSN_PROJECT_ID}/envelope`]:
-			'https://monitoring.leonscherer.com',
+		[`/api/${publicEnv.PUBLIC_SENTRY_DSN_PROJECT_ID}/envelope`]: publicEnv.PUBLIC_SENTRY_DSN_DOMAIN,
 	},
 	{
 		changeOrigin: true,
