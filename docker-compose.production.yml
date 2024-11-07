@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./docker/db/Dockerfile
     ports:
-      - 5001:5001
+      - ${PORT_DB}:${PORT_DB}
     volumes:
       - /volumes/funk-word-map/staging/pb_data:/pb/pb_data
     # healthcheck:
@@ -21,10 +21,10 @@ services:
       dockerfile: ./docker/web/Dockerfile
       target: production
     ports:
-      - 5000:5000
+      - ${PORT_WEB}:${PORT_WEB}
     environment:
       ORIGIN: ${ORIGIN}
-      PORT: ${PORT}
+      PORT: ${PORT_WEB}
       DB_URL: ${DB_URL}
       DB_ADMIN_USER: ${DB_ADMIN_USER}
       DB_ADMIN_PASSWORD: ${DB_ADMIN_PASSWORD}
