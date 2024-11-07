@@ -33,6 +33,7 @@ export const initializeSentry = (instance: {
 		dsn,
 		environment,
 		release,
+		debug: import.meta.env.DEV,
 	})
 
 	console.log('Sentry initialized!')
