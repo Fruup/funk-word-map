@@ -7,7 +7,7 @@ services:
     ports:
       - ${PORT_DB}:${PORT_DB}
     volumes:
-      - /volumes/funk-word-map/staging/pb_data:/pb/pb_data
+      - /volumes/funk-word-map/${COOLIFY_ENVIRONMENT:-default}/pb_data:/pb/pb_data
     environment:
       PORT: ${PORT_DB}
 
