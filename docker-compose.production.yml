@@ -5,15 +5,11 @@ services:
       context: .
       dockerfile: ./docker/db/Dockerfile
     ports:
-      - ${PORT_DB}:8080
+      - ${PORT_DB}:${PORT_DB}
     volumes:
-      - /volumes/funk-word-map/staging/pb_data:/pb/pb_data
-    # healthcheck:
-    #   test: ["CMD", "curl", "-sSf", "http://localhost:8080"]
-    #   interval: 1m
-    #   timeout: 5s
-    #   retries: 5
-    #   start_period: 5s
+      - /volumes/funk-word-map/${COOLIFY_ENVIRONMENT:-default}/pb_data:/pb/pb_data
+    environment:
+      PORT: ${PORT_DB:?}
 
   web:
     build:
@@ -23,16 +19,17 @@ services:
     ports:
       - ${PORT_WEB}:${PORT_WEB}
     environment:
-      ORIGIN: ${ORIGIN}
-      PORT: ${PORT_WEB}
-      DB_URL: ${DB_URL}
-      DB_ADMIN_USER: ${DB_ADMIN_USER}
-      DB_ADMIN_PASSWORD: ${DB_ADMIN_PASSWORD}
+      ORIGIN: ${ORIGIN:?}
+      PORT: ${PORT_WEB:?}
+      DB_URL: ${DB_URL:?}
+      DB_ADMIN_USER: ${DB_ADMIN_USER:?}
+      DB_ADMIN_PASSWORD: ${DB_ADMIN_PASSWORD:?}
       ADMIN_AUTH: ${ADMIN_AUTH}
 
       PUBLIC_IS_STAGING: ${PUBLIC_IS_STAGING}
       PUBLIC_SOURCE_COMMIT: ${SOURCE_COMMIT}
       PUBLIC_ORIGIN: ${ORIGIN}
+      PUBLIC_ENVIRONMENT: ${COOLIFY_ENVIRONMENT}
 
       PUBLIC_SENTRY_DSN_KEY: ${PUBLIC_SENTRY_DSN_KEY}
       PUBLIC_SENTRY_DSN_DOMAIN: ${PUBLIC_SENTRY_DSN_DOMAIN}
